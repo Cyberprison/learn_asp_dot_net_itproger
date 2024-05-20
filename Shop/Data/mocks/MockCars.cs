@@ -27,7 +27,7 @@ namespace Shop.Data.mocks
                         isFavourite = true,
                         available = true,
                         Category = _categoryCars.AllCategories.First()
-                    }
+                    },
                     new Car {
                         name = "lada",
                         shortDesc = "",
