@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
+using Shop.Data.Interfaces;
+using Shop.Data.mocks;
+
 namespace Shop
 {
     public class Startup
@@ -16,6 +19,11 @@ namespace Shop
         public void ConfigureServices(IServiceCollection services)
         {
             //для регистрации различных модулей и плагинов
+            //подключение различных сервисов
+
+            //позволяет объединить между собой интерфейс и класс, который реализует его
+            services.AddTransient<IAllCars, MockCars>();
+            services.AddTransient<ICarsCategory, MockCategory>();
 
             //подключили поддержку мвс
             services.AddMvc();
