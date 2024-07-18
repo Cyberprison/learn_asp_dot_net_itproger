@@ -20,12 +20,14 @@ namespace Shop.Data.mocks
                 {
                     //добавить ещё машины
 
+                    //скачать картинки и прописать путь
+
                     new Car
                     {
                         name = "Tesla",
                         shortDesc = "",
                         longDesc = "",
-                        img = "",
+                        img = "", 
                         price = 2500000,
                         isFavourite = true,
                         available = true,
