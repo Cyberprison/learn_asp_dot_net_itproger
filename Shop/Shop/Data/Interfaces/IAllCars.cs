@@ -13,7 +13,7 @@ namespace Shop.Data.Interfaces
         IEnumerable<Car> Cars { get; }
 
         //избранные машины
-        IEnumerable<Car> getFavCars { get; set; }
+        IEnumerable<Car> getFavCars { get; }
 
         //машина по айди
         Car getObjectCar(int carId);
