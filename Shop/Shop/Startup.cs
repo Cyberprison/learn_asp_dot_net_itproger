@@ -79,7 +79,26 @@ namespace Shop
 
             //позволяет отслеживать юрл адрес
             //если нет контроллера и соответсвующего представления, то будет представление по умолчанию
-            app.UseMvcWithDefaultRoute();
+            //Home Index
+            //app.UseMvcWithDefaultRoute();
+
+            //новый путь по умолчанию
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
+                routes.MapRoute(
+                    name: "categoryFilter",
+                    template: "Car/{action}/{category?}",
+                    defaults: new
+                    {
+                        Controller = "Car",
+                        action = "List"
+                    }
+                );
+            });
             
             //регистрация как сервис с областью действия, к нему можно обращаться из различных файлов
             //при обращении к нему из вне сервиса, нужно поместить в доп сервис(область)

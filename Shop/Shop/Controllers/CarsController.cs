@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 using Shop.Data.Interfaces;
-
+using Shop.Data.Models;
 using Shop.ViewModels;
 
 namespace Shop.Controllers
@@ -22,15 +22,44 @@ namespace Shop.Controllers
         }
 
         //метод для вывода всех машин
-        public ViewResult List()
+        [Route("Cars/List")]
+        [Route("Cars/List/{category}")]
+        public ViewResult List(string category)
         {
-            CarsListViewModel obj = new CarsListViewModel();
-            obj.allCars = _allCars.Cars;
-            obj.currCategory = "Cars";
+            string _category = category;
+            IEnumerable<Car> cars = null;
 
+            string currCategory = "";
+
+            if(string.IsNullOrEmpty(category))
+            {
+                cars = _allCars.Cars.OrderBy(i => i.id);
+            }
+            else
+            {
+                if(string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    cars = _allCars.Cars.Where(i => i.categoryID == 1).OrderBy(i => i.id);
+                    currCategory = "electro";
+                }
+                else
+                {
+                    if (string.Equals("classic", category, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cars = _allCars.Cars.Where(i => i.categoryID == 2).OrderBy(i => i.id);
+                        currCategory = "classic";
+                    }
+                }
+            }
+            var carObj = new CarsListViewModel
+            {
+                allCars = cars,
+                currCategory = currCategory
+            };
+            
             @ViewBag.Title = "Cars page";
 
-            return View(obj);
+            return View(carObj);
         }
     }
 }
