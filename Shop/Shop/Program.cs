@@ -15,7 +15,6 @@ namespace Shop
         public static void Main(string[] args)
         {
             //запуск всего приложения, хоста
-
             CreateWebHostBuilder(args).Build().Run();
         }
 

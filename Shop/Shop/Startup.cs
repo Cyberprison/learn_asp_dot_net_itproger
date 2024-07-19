@@ -43,6 +43,8 @@ namespace Shop
             //позволяет объединить между собой интерфейс и класс, который реализует его
             services.AddTransient<IAllCars, CarRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
+            
+            services.AddTransient<IAllOrders, OrderRepository>();
 
             //подключение сервисов
             //сервис для работы с сервисами
