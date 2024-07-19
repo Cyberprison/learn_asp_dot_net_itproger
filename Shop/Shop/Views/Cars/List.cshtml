@@ -5,15 +5,9 @@
 
 <div class="row mt-5 mb-2">
     @{
-        foreach (var car in Model.allCars)
+        foreach (Car car in Model.allCars)
         {
-            <div class="col-lg-4">
-                <img class="img-thumbnail" src="@car.img" alt="@car.name"/>
-                <h2>Model: @car.name</h2>
-                <p>@car.shortDesc</p>
-                <p>Price: @car.price.ToString("c")</p>
-                <p><a class="btn btn-warning" href="#">more details</a></p>
-            </div>
+            @Html.Partial("AllCars", car)
         }
     }
 

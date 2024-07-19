@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Shop.Data;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data.Repository;
+using Shop.Data.Models;
 
 namespace Shop
 {
@@ -43,8 +44,19 @@ namespace Shop
             services.AddTransient<IAllCars, CarRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
 
+            //подключение сервисов
+            //сервис для работы с сервисами
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //разные корзины для пользователей
+            services.AddScoped(sp => ShopCart.GetCart(sp));
+
             //подключили поддержку мвс
             services.AddMvc();
+
+            //используем кэш и сессии
+            services.AddMemoryCache();
+            services.AddSession();
 
         }
 
@@ -61,6 +73,9 @@ namespace Shop
 
             //использование стат файлов
             app.UseStaticFiles();
+
+            //используем сессии
+            app.UseSession();
 
             //позволяет отслеживать юрл адрес
             //если нет контроллера и соответсвующего представления, то будет представление по умолчанию
